@@ -45,7 +45,6 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 -- Setup lazy.nvim
 require("lazy").setup({
     spec = {
-        -- { "projekt0n/github-nvim-theme", name = "github-theme" },
         { import = "plugins" },
     },
     -- Configure any other settings here. See the documentation for more details.
