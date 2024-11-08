@@ -12,7 +12,7 @@ return {
                     },
                 },
                 document_highlight = {
-                    enabled = true,
+                    enabled = false,
                 },
                 diagnostics = {
                     underline = true,
