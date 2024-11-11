@@ -643,16 +643,6 @@ require('lazy').setup({
         -- clangd = {},
         -- gopls = {},
         pyright = {},
-        -- sourcekit = {
-        --   mason = false,
-        --   capabilities = {
-        --     workspace = {
-        --       didChangeWatchedFiles = {
-        --         dynamicRegistration = true,
-        --       },
-        --     },
-        --   },
-        -- },
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -707,7 +697,9 @@ require('lazy').setup({
           end,
         },
       }
-      require('lspconfig')['sourcekit'].setup {}
+      if vim.loop.os_uname().sysname == 'Darwin' then
+        require('lspconfig')['sourcekit'].setup {}
+      end
     end,
   },
 
