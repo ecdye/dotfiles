@@ -24,6 +24,7 @@ alias l.="ls -d .*"
 alias ll="ls -l"
 alias grep="grep --color=auto"
 alias cd..="cd .."
+alias vim="nvim"
 
 # if command -v nvim &> /dev/null; then
 #     vim () {
