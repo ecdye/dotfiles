@@ -25,21 +25,22 @@ alias ll="ls -l"
 alias grep="grep --color=auto"
 alias cd..="cd .."
 
-if command -v nvim &> /dev/null; then
-    vim () {
-	if [[ -z "$@" ]]; then
-	    if [[ -f "./Session.vim" ]]; then
-		nvim -S Session.vim -c 'lua vim.g.savesession = true'
-	    else
-		nvim -c 'lua vim.g.savesession = true'
-	    fi
-	else
-	    nvim "$@"
-	fi
-    }
-fi
+# if command -v nvim &> /dev/null; then
+#     vim () {
+# 	if [[ -z "$@" ]]; then
+# 	    if [[ -f "./Session.vim" ]]; then
+# 		nvim -S Session.vim -c 'lua vim.g.savesession = true'
+# 	    else
+# 		nvim -c 'lua vim.g.savesession = true'
+# 	    fi
+# 	else
+# 	    nvim "$@"
+# 	fi
+#     }
+# fi
 
 if comand -v gpg &> /dev/null; then
     export GPG_TTY=$(tty)
 fi
 
+# vim: filetype=sh
