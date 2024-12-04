@@ -10,11 +10,11 @@ shopt -s histappend
 
 PS1='\[\033[01;32m\]\u\[\033[00m\]\[\033[01;90m\]@\[\033[00m\]\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[\033[01;31m\]$(__git_ps1)\[\033[00m\] \$ '
 
-if [ -d "$HOME/.local/bin" ] ; then
+if [ -d "$HOME/.local/bin" ]; then
     export PATH="$HOME/.local/bin:$PATH"
 fi
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
+if [ -d "$HOME/bin" ]; then
+    export PATH="$HOME/bin:$PATH"
 fi
 
 alias ls="ls --color=auto"
