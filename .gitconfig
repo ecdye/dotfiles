@@ -1,0 +1,11 @@
+[user]
+	name = Ethan Dye
+	email = mrtops03@gmail.com
+[color]
+	ui = true
+[push]
+	autoSetupRemote = true
+[init]
+	defaultBranch = main
+[core]
+	editor = nvim

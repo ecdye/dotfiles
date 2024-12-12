@@ -1,7 +1,7 @@
 if [[ "$OSTYPE" == "darwin"* ]]; then
     [[ -d /opt/homebrew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
     HOMEBREW_PREFIX="$(brew --prefix)"
-    [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]] && source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
+    [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]] && . "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
 fi
 
 shopt -s globstar
@@ -24,20 +24,6 @@ alias ll="ls -l"
 alias grep="grep --color=auto"
 alias cd..="cd .."
 alias vim="nvim"
-
-# if command -v nvim &> /dev/null; then
-#     vim () {
-# 	if [[ -z "$@" ]]; then
-# 	    if [[ -f "./Session.vim" ]]; then
-# 		nvim -S Session.vim -c 'lua vim.g.savesession = true'
-# 	    else
-# 		nvim -c 'lua vim.g.savesession = true'
-# 	    fi
-# 	else
-# 	    nvim "$@"
-# 	fi
-#     }
-# fi
 
 if comand -v gpg &> /dev/null; then
     export GPG_TTY=$(tty)

@@ -1,0 +1,16 @@
+[user]
+	name = Ethan Dye
+	email = mrtops03@gmail.com
+	signingkey = 3E5F75E423B9119D
+[commit]
+	gpgsign = true
+[color]
+	ui = true
+[push]
+	autoSetupRemote = true
+[gpg]
+	program = /opt/homebrew/bin/gpg
+[init]
+	defaultBranch = main
+[core]
+	editor = nvim
