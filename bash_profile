@@ -2,6 +2,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     [[ -d /opt/homebrew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
     HOMEBREW_PREFIX="$(brew --prefix)"
     [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]] && . "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
+    [[ -d /opt/homebrew/opt/gawk ]] && export PATH="/opt/homebrew/opt/gawk/libexec/gnubin:$PATH"
 fi
 
 shopt -s globstar
