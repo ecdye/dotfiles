@@ -9,7 +9,8 @@ shopt -s globstar
 shopt -s checkwinsize
 shopt -s histappend
 
-PS1='\[\033[01;32m\]\u\[\033[00m\]\[\033[01;90m\]@\[\033[00m\]\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[\033[01;31m\]$(__git_ps1)\[\033[00m\] \$ '
+export PS1='\[\033[01;32m\]\u\[\033[00m\]\[\033[01;90m\]@\[\033[00m\]\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[\033[01;31m\]$(__git_ps1)\[\033[00m\] \$ '
+export MANPAGER='nvim +Man!'
 
 if [ -d "$HOME/.local/bin" ]; then
     export PATH="$HOME/.local/bin:$PATH"
