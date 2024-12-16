@@ -9,3 +9,10 @@
 	defaultBranch = main
 [core]
 	editor = nvim
+[allias]
+	co = checkout
+	ci = commit
+	st = status
+	br = branch
+	lg = log --oneline --decorate --all --graph
+	df = diff
