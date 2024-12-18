@@ -1,0 +1,33 @@
+clipboard-read = allow
+clipboard-write = allow
+window-colorspace = display-p3
+window-height = 35
+window-width = 130
+window-step-resize = true
+window-save-state = always
+theme = Terminal Basic
+bold-is-bright = true
+background = #202020
+foreground = #dbdbdb
+selection-background = #314f78
+selection-foreground = #000000
+cursor-color = #8b8b8b
+palette = 0=#000000
+palette = 1=#990000
+palette = 2=#00a600
+palette = 3=#999900
+palette = 4=#0069d2
+palette = 5=#b200b2
+palette = 6=#00a6b2
+palette = 7=#a1a1a1
+palette = 8=#a5a5a5
+palette = 9=#e50000
+palette = 10=#00d900
+palette = 11=#e5e500
+palette = 12=#0069ff
+palette = 13=#e500e5
+palette = 14=#00e5e5
+palette = 15=#e4e4e4
+font-size = 12
+font-family = "Hack Nerd Font Mono"
+macos-titlebar-style = native

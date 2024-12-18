@@ -1,3 +1,8 @@
+# Ghostty shell integration for Bash. This must be at the top of your bashrc!
+if [ -n "${GHOSTTY_RESOURCES_DIR}" ]; then
+    builtin source "${GHOSTTY_RESOURCES_DIR}/shell-integration/bash/ghostty.bash"
+fi
+
 if [[ "$OSTYPE" == "darwin"* ]]; then
     [[ -d /opt/homebrew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
     HOMEBREW_PREFIX="$(brew --prefix)"
