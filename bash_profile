@@ -1,4 +1,5 @@
 # Ghostty shell integration for Bash. This must be at the top of your bashrc!
+[[ -z GHOSTTY_RESOURCES_DIR ]] && [[ -f $HOME/dotfiles/ghostty/ghostty.bash ]] && export GHOSTTY_RESOURCES_DIR=$HOME/dotfiles/ghostty
 if [ -n "${GHOSTTY_RESOURCES_DIR}" ]; then
     builtin source "${GHOSTTY_RESOURCES_DIR}/shell-integration/bash/ghostty.bash"
 fi
