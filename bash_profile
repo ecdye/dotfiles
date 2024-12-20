@@ -1,29 +1,22 @@
 # Ghostty shell integration for Bash. This must be at the top of your bashrc!
-[[ -z GHOSTTY_RESOURCES_DIR ]] && [[ -f $HOME/dotfiles/ghostty/ghostty.bash ]] && export GHOSTTY_RESOURCES_DIR=$HOME/dotfiles/ghostty
-if [ -n "${GHOSTTY_RESOURCES_DIR}" ]; then
-    builtin source "${GHOSTTY_RESOURCES_DIR}/shell-integration/bash/ghostty.bash"
-fi
+[[ -n "$GHOSTTY_RESOURCES_DIR" ]] && . "${GHOSTTY_RESOURCES_DIR}/shell-integration/bash/ghostty.bash"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
     [[ -d /opt/homebrew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
     HOMEBREW_PREFIX="$(brew --prefix)"
     [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]] && . "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
-    [[ -d /opt/homebrew/opt/gawk ]] && export PATH="/opt/homebrew/opt/gawk/libexec/gnubin:$PATH"
+    [[ -d "${HOMEBREW_PREFIX}/opt/gawk" ]] && export PATH="/opt/homebrew/opt/gawk/libexec/gnubin:$PATH"
 fi
 
 shopt -s globstar
 shopt -s checkwinsize
 shopt -s histappend
 
-export PS1='\[\033[01;32m\]\u\[\033[00m\]\[\033[01;90m\]@\[\033[00m\]\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[\033[01;31m\]$(__git_ps1)\[\033[00m\] \$ '
+export PS1='\[\e[1;92m\]\u\[\e[0m\]\[\e[1;37m\]@\[\e[0m\]\[\e[1;92m\]\h\[\e[0m\]:\[\e[1;94m\]\w\[\e[0m\]\[\e[1;91m\]$(__git_ps1)\[\e[0m\] \$ '
 export MANPAGER='nvim +Man!'
 
-if [ -d "$HOME/.local/bin" ]; then
-    export PATH="$HOME/.local/bin:$PATH"
-fi
-if [ -d "$HOME/bin" ]; then
-    export PATH="$HOME/bin:$PATH"
-fi
+[[ -d "${HOME}/.local/bin" ]] && export PATH="${HOME}/.local/bin:$PATH"
+[[ -d "${HOME}/bin" ]] && export PATH="${HOME}/bin:$PATH"
 
 alias ls="ls --color=auto"
 alias la="ls -la"
