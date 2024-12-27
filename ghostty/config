@@ -5,7 +5,7 @@ clipboard-write = allow
 # Appearance Settings
 window-colorspace = display-p3
 window-height = 30
-window-width = 120
+window-width = 125
 window-step-resize = true
 window-save-state = always
 theme = Apple System Colors
