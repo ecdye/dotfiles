@@ -25,6 +25,7 @@ alias ll="ls -l"
 alias grep="grep --color=auto"
 alias cd..="cd .."
 alias vim="nvim"
+alias dotfiles="cd ${HOME}/dotfiles"
 
 if comand -v gpg &> /dev/null; then
     export GPG_TTY=$(tty)
