@@ -14,7 +14,6 @@ shopt -s histappend
 
 export PS1='\[\e[1;92m\]\u\[\e[0m\]\[\e[1;37m\]@\[\e[0m\]\[\e[1;92m\]\h\[\e[0m\]:\[\e[1;94m\]\w\[\e[0m\]\[\e[1;91m\]$(__git_ps1)\[\e[0m\] \$ '
 export MANPAGER='nvim +Man!'
-export JAVA_HOME=$(/usr/libexec/java_home -v 21)
 
 [[ -d "${HOME}/.local/bin" ]] && export PATH="${HOME}/.local/bin:$PATH"
 [[ -d "${HOME}/bin" ]] && export PATH="${HOME}/bin:$PATH"
@@ -30,6 +29,9 @@ alias dotfiles="cd ${HOME}/dotfiles"
 
 if comand -v gpg &> /dev/null; then
     export GPG_TTY=$(tty)
+fi
+if command -v java &> /dev/null; then
+    export JAVA_HOME=$(/usr/libexec/java_home -v 21)
 fi
 
 # vim: filetype=sh
