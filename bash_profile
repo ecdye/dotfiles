@@ -6,6 +6,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     HOMEBREW_PREFIX="$(brew --prefix)"
     [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]] && . "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
     [[ -d "${HOMEBREW_PREFIX}/opt/gawk" ]] && export PATH="/opt/homebrew/opt/gawk/libexec/gnubin:$PATH"
+    [[ -d "/opt/homebrew/Cellar/openjdk" ]] && export JAVA_HOME="$(/usr/libexec/java_home -v 21)"
 fi
 
 shopt -s globstar
@@ -29,9 +30,6 @@ alias dotfiles="cd ${HOME}/dotfiles"
 
 if comand -v gpg &> /dev/null; then
     export GPG_TTY=$(tty)
-fi
-if command -v java &> /dev/null; then
-    export JAVA_HOME=$(/usr/libexec/java_home -v 21)
 fi
 
 # vim: filetype=sh
