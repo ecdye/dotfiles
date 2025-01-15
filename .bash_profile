@@ -1,4 +1,4 @@
-# Ghostty shell integration for Bash. This must be at the top of your bashrc!
+#!/usr/bin/env bash
 [[ -n "$GHOSTTY_RESOURCES_DIR" ]] && . "${GHOSTTY_RESOURCES_DIR}/shell-integration/bash/ghostty.bash"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -14,7 +14,7 @@ shopt -s checkwinsize
 shopt -s histappend
 
 export PS1='\[\e[1;92m\]\u\[\e[0m\]\[\e[1;37m\]@\[\e[0m\]\[\e[1;92m\]\h\[\e[0m\]:\[\e[1;94m\]\w\[\e[0m\]\[\e[1;91m\]$(__git_ps1)\[\e[0m\] \$ '
-export MANPAGER='nvim +Man!'
+export PAGER='less --mouse'
 
 [[ -d "${HOME}/.local/bin" ]] && export PATH="${HOME}/.local/bin:$PATH"
 [[ -d "${HOME}/bin" ]] && export PATH="${HOME}/bin:$PATH"
@@ -25,11 +25,18 @@ alias l.="ls -d .*"
 alias ll="ls -l"
 alias grep="grep --color=auto"
 alias cd..="cd .."
-alias vim="nvim"
+alias cs="cd"
 alias dotfiles="cd ${HOME}/dotfiles"
+alias src="cd ${HOME}/src"
+
+if command -v nvim &> /dev/null; then
+    export MANPAGER='nvim +Man!'
+    export EDITOR='nvim'
+    alias vim="nvim"
+fi
 
 if comand -v gpg &> /dev/null; then
     export GPG_TTY=$(tty)
 fi
 
-# vim: filetype=sh
+# vim: filetype=bash

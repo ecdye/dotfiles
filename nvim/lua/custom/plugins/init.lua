@@ -3,19 +3,25 @@
 --
 -- See the kickstart.nvim README for more information
 return {
-  'zbirenbaum/copilot-cmp',
-  event = 'InsertEnter',
-  config = function()
-    require('copilot_cmp').setup()
-  end,
-  dependencies = {
-    'zbirenbaum/copilot.lua',
-    cmd = 'Copilot',
+  {
+    'zbirenbaum/copilot-cmp',
+    event = 'InsertEnter',
     config = function()
-      require('copilot').setup {
-        suggestion = { enabled = false },
-        panel = { enabled = false },
-      }
+      require('copilot_cmp').setup()
     end,
+    dependencies = {
+      'zbirenbaum/copilot.lua',
+      cmd = 'Copilot',
+      config = function()
+        require('copilot').setup {
+          suggestion = { enabled = false },
+          panel = { enabled = false },
+        }
+      end,
+    },
   },
+  {
+    -- Included for better git commit formatting and further git integration
+    'tpope/vim-fugitive',
+  }
 }
