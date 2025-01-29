@@ -35,7 +35,7 @@ if command -v nvim &> /dev/null; then
     alias vim="nvim"
 fi
 
-if comand -v gpg &> /dev/null; then
+if command -v gpg &> /dev/null; then
     export GPG_TTY=$(tty)
 fi
 
