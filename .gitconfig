@@ -8,8 +8,6 @@
 	ui = true
 [push]
 	autoSetupRemote = true
-[gpg]
-	program = /opt/homebrew/bin/gpg
 [init]
 	defaultBranch = main
 [core]
