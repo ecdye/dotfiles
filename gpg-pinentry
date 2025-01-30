@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+if [[ $OSTYPE == "linux"* ]]; then
+    pinentry="/usr/bin/pinentry"
+elif [[ $OSTYPE == "darwin"* ]]; then
+    pinentry="/opt/homebrew/bin/pinentry-mac"
+else
+    echo "Unsupported OS"
+    exit 1
+fi
+
+exec $pinentry "$@"
