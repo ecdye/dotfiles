@@ -1,6 +1,7 @@
 tap "homebrew/bundle"
 brew "bash"
 brew "bash-completion@2"
+brew "shellcheck"
 brew "python@3.13"
 brew "cmake"
 brew "ffmpeg"
