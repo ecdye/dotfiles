@@ -1,7 +1,7 @@
 - defaults:
-  link:
-    create: true
-    relink: true
+    link:
+      create: true
+      relink: true
 
 - clean:
     ~/:
@@ -9,17 +9,18 @@
       recursive: true
 
 - link:
-  ~/.config/nvim: nvim
-  ~/.config/ghostty: ghostty
-  ~/.gitconfig: .gitconfig
-  ~/.gitignore_global: .gitignore_global
-  ~/.bash_profile: .bash_profile
-  ~/.gnupg/common.conf: gnupg/common.conf
-  ~/.gnupg/gpg.conf: gnupg/gpg.conf
+    ~/.config/nvim: nvim
+    ~/.config/ghostty: ghostty
+    ~/.gitconfig: .gitconfig
+    ~/.gitignore_global: .gitignore_global
+    ~/.bash_profile: .bash_profile
+    ~/.gnupg/common.conf: gnupg/common.conf
+    ~/.gnupg/gpg.conf: gnupg/gpg.conf
 
 - create:
-  - ~/src
+    - ~/src
 
 - shell:
-  - sed -e 's|PINENTRYPATH|'"$(pwd)"'/gpg-pinentry|' gnupg/gpg-agent.conf > ~/.gnupg/gpg-agent.conf
-  - chmod -R "$USER" ~/.gnupg
+    - sed -e 's|PINENTRYPATH|'"$(pwd)"'/gpg-pinentry|' gnupg/gpg-agent.conf > ~/.gnupg/gpg-agent.conf
+    - chown -R "$USER" ~/.gnupg
+    - nvim --headless "+Lazy! restore" +qa

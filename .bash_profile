@@ -6,7 +6,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     HOMEBREW_PREFIX="$(brew --prefix)"
     [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]] && . "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
     [[ -d "${HOMEBREW_PREFIX}/opt/gawk" ]] && export PATH="/opt/homebrew/opt/gawk/libexec/gnubin:$PATH"
-    [[ -d "/opt/homebrew/Cellar/openjdk" ]] && export JAVA_HOME="$(/usr/libexec/java_home -v 21)"
+    export JAVA_HOME="$(/usr/libexec/java_home -v 21)"
 fi
 
 shopt -s globstar
