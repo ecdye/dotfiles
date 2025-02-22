@@ -18,6 +18,7 @@ export PAGER='less --mouse'
 
 [[ -d "${HOME}/.local/bin" ]] && export PATH="${HOME}/.local/bin:$PATH"
 [[ -d "${HOME}/bin" ]] && export PATH="${HOME}/bin:$PATH"
+[[ -r "/etc/profile.d/bash_completion.sh" ]] && . "/etc/profile.d/bash_completion.sh"
 
 alias ls="ls --color=auto"
 alias la="ls -la"
