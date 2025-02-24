@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 [[ -n "$GHOSTTY_RESOURCES_DIR" ]] && . "${GHOSTTY_RESOURCES_DIR}/shell-integration/bash/ghostty.bash"
+[[ -f "${HOME}"/.bashrc ]] && . "${HOME}/.bashrc"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
     [[ -d /opt/homebrew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
