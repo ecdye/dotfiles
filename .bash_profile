@@ -8,6 +8,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]] && . "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
     [[ -d "${HOMEBREW_PREFIX}/opt/gawk" ]] && export PATH="/opt/homebrew/opt/gawk/libexec/gnubin:$PATH"
     export JAVA_HOME="$(/usr/libexec/java_home -v 21)"
+    alias unlock-keychain="security unlock-keychain ~/Library/Keychains/login.keychain-db"
 fi
 
 shopt -s globstar
@@ -21,11 +22,11 @@ export PAGER='less --mouse'
 [[ -d "${HOME}/bin" ]] && export PATH="${HOME}/bin:$PATH"
 [[ -r "/etc/profile.d/bash_completion.sh" ]] && . "/etc/profile.d/bash_completion.sh"
 
-alias ls="ls --color=auto"
+alias ls="ls --color=always"
 alias la="ls -la"
 alias l.="ls -d .*"
 alias ll="ls -l"
-alias grep="grep --color=auto"
+alias grep="grep --color=always"
 alias cd..="cd .."
 alias cs="cd"
 alias dotfiles="cd ${HOME}/dotfiles"
