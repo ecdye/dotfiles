@@ -5,7 +5,7 @@
 if [[ "$OSTYPE" == "darwin"* ]]; then
     [[ -d /opt/homebrew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
     HOMEBREW_PREFIX="$(brew --prefix)"
-    [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]] && . "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
+    [[ -f "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]] && . "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
     [[ -d "${HOMEBREW_PREFIX}/opt/gawk" ]] && export PATH="/opt/homebrew/opt/gawk/libexec/gnubin:$PATH"
     export JAVA_HOME="$(/usr/libexec/java_home -v 21)"
     alias uk="security unlock-keychain ~/Library/Keychains/login.keychain-db"
@@ -20,7 +20,7 @@ export PAGER='less --mouse'
 
 [[ -d "${HOME}/.local/bin" ]] && export PATH="${HOME}/.local/bin:$PATH"
 [[ -d "${HOME}/bin" ]] && export PATH="${HOME}/bin:$PATH"
-[[ -r "/etc/profile.d/bash_completion.sh" ]] && . "/etc/profile.d/bash_completion.sh"
+[[ -f "/etc/profile.d/bash_completion.sh" ]] && . "/etc/profile.d/bash_completion.sh"
 
 alias ls="ls --color=always"
 alias la="ls -la"
