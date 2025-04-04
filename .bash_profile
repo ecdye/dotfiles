@@ -6,7 +6,11 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     [[ -d /opt/homebrew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
     HOMEBREW_PREFIX="$(brew --prefix)"
     [[ -f "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]] && . "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
-    [[ -d "${HOMEBREW_PREFIX}/opt/gawk" ]] && export PATH="/opt/homebrew/opt/gawk/libexec/gnubin:$PATH"
+    [[ -d "${HOMEBREW_PREFIX}/opt/gawk" ]] && export PATH="${HOMEBREW_PREFIX}/opt/gawk/libexec/gnubin:$PATH"
+    if [[ -d "${HOMEBREW_PREFIX}/opt/ruby" ]]; then
+        export PATH="${HOMEBREW_PREFIX}/opt/ruby/bin:$PATH"
+        export PATH="${HOMEBREW_PREFIX}/lib/ruby/gems/3.4.0/bin:$PATH"
+    fi
     export JAVA_HOME="$(/usr/libexec/java_home -v 21)"
     alias uk="security unlock-keychain ~/Library/Keychains/login.keychain-db"
 fi
