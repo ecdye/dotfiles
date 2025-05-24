@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [[ $OSTYPE == "linux"* ]]; then
-    pinentry="/usr/bin/pinentry"
+    pinentry="/usr/bin/pinentry-tty"
 elif [[ $OSTYPE == "darwin"* ]]; then
     pinentry="/opt/homebrew/bin/pinentry-mac"
 else

@@ -11,7 +11,9 @@
 - link:
     ~/.tmux.conf: tmux.conf
     ~/.config/nvim: nvim
-    ~/.config/ghostty: ghostty
+    ~/.config/ghostty:
+        path: ghostty
+        force: true
     ~/.gitconfig: .gitconfig
     ~/.gitignore_global: .gitignore_global
     ~/.bash_profile: .bash_profile
