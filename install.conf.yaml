@@ -9,6 +9,7 @@
       recursive: true
 
 - link:
+    ~/.tmux.conf: tmux.conf
     ~/.config/nvim: nvim
     ~/.config/ghostty: ghostty
     ~/.gitconfig: .gitconfig
