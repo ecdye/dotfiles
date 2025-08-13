@@ -5,6 +5,7 @@ clipboard-write = allow
 # Appearance Settings
 cursor-style = bar
 shell-integration-features = cursor,sudo,title
+window-save-state = always
 window-padding-balance = true
 window-colorspace = display-p3
 window-height = 30
@@ -17,3 +18,9 @@ quick-terminal-position = bottom
 
 # Keybinds
 keybind = global:cmd+y=toggle_quick_terminal
+keybind = ctrl+b>h=goto_split:left
+keybind = ctrl+b>j=goto_split:down
+keybind = ctrl+b>k=goto_split:up
+keybind = ctrl+b>l=goto_split:right
+keybind = ctrl+b>v=new_split:right
+keybind = ctrl+b>x=new_split:down
