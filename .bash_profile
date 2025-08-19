@@ -15,6 +15,10 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     alias uk="security unlock-keychain ~/Library/Keychains/login.keychain-db"
 fi
 
+if [[ "$OSTYPE" == "linux"* ]]; then
+    [[ -d /home/linuxbrew/.linuxbrew ]] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
 shopt -s globstar
 shopt -s checkwinsize
 shopt -s histappend
