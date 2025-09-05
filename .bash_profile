@@ -17,6 +17,7 @@ fi
 
 if [[ "$OSTYPE" == "linux"* ]]; then
     [[ -d /home/linuxbrew/.linuxbrew ]] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    [[ -d /usr/sbin ]] && export PATH="/usr/sbin:${PATH}"
 fi
 
 shopt -s globstar
