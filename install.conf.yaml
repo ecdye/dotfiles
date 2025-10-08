@@ -21,7 +21,8 @@
     ~/.gnupg/gpg.conf: gnupg/gpg.conf
 
 - create:
-    - ~/src
+    ~/src:
+        mode: 0775
 
 - shell:
     - sed -e 's|PINENTRYPATH|'"$(pwd)"'/gpg-pinentry|' gnupg/gpg-agent.conf > ~/.gnupg/gpg-agent.conf
