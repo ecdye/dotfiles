@@ -3,7 +3,7 @@
 [[ -f "${HOME}"/.bashrc ]] && . "${HOME}/.bashrc"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    [[ -d /opt/homebrew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
+    [[ -d /opt/homebrew ]] && eval "$(/opt/homebrew/bin/brew shellenv)" && export HOMEBREW_NO_ENV_HINTS=1
     HOMEBREW_PREFIX="$(brew --prefix)"
     [[ -f "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]] && . "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
     [[ -d "${HOMEBREW_PREFIX}/opt/gawk" ]] && export PATH="${HOMEBREW_PREFIX}/opt/gawk/libexec/gnubin:$PATH"
@@ -16,7 +16,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 
 if [[ "$OSTYPE" == "linux"* ]]; then
-    [[ -d /home/linuxbrew/.linuxbrew ]] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    [[ -d /home/linuxbrew/.linuxbrew ]] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" && export HOMEBREW_NO_ENV_HINTS=1
     [[ -d /usr/sbin ]] && export PATH="/usr/sbin:${PATH}"
 fi
 
