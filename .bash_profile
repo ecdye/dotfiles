@@ -12,6 +12,9 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
         export PATH="${HOMEBREW_PREFIX}/lib/ruby/gems/3.4.0/bin:$PATH"
     fi
     export JAVA_HOME="$(/usr/libexec/java_home -v 21)"
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+    [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
     alias uk="security unlock-keychain ~/Library/Keychains/login.keychain-db"
 fi
 
