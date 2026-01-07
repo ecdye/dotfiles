@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 [[ -n "$GHOSTTY_RESOURCES_DIR" ]] && . "${GHOSTTY_RESOURCES_DIR}/shell-integration/bash/ghostty.bash"
 [[ -f "${HOME}/.bashrc" ]] && . "${HOME}/.bashrc"
-[[ -f "${HOME}/env.sh" ]] && . "${HOME}/env.sh"
+[[ -f "${HOME}/.env" ]] && . "${HOME}/.env"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
     [[ -d /opt/homebrew ]] && eval "$(/opt/homebrew/bin/brew shellenv)" && export HOMEBREW_NO_ENV_HINTS=1
@@ -22,6 +22,7 @@ fi
 if [[ "$OSTYPE" == "linux"* ]]; then
     [[ -d /home/linuxbrew/.linuxbrew ]] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" && export HOMEBREW_NO_ENV_HINTS=1
     [[ -d /usr/sbin ]] && export PATH="/usr/sbin:${PATH}"
+    [[ -x /usr/share/git-core/contrib/completion/git-prompt.sh ]] && . /usr/share/git-core/contrib/completion/git-prompt.sh
 fi
 
 shopt -s globstar

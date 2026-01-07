@@ -24,3 +24,7 @@ keybind = ctrl+b>k=goto_split:up
 keybind = ctrl+b>l=goto_split:right
 keybind = ctrl+b>v=new_split:right
 keybind = ctrl+b>x=new_split:down
+
+# Update Settings
+auto-update = download
+auto-update-channel = tip
