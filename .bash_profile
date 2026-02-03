@@ -24,6 +24,7 @@ if [[ "$OSTYPE" == "linux"* ]]; then
     [[ -d /usr/sbin ]] && export PATH="/usr/sbin:${PATH}"
     [[ -f /usr/share/git-core/contrib/completion/git-prompt.sh ]] && . /usr/share/git-core/contrib/completion/git-prompt.sh
 fi
+[[ -d "${HOME}/conda" ]] && . "${HOME}/conda/bin/activate"
 
 shopt -s globstar
 shopt -s checkwinsize
