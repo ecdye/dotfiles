@@ -22,7 +22,7 @@ fi
 if [[ "$OSTYPE" == "linux"* ]]; then
     [[ -d /home/linuxbrew/.linuxbrew ]] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" && export HOMEBREW_NO_ENV_HINTS=1
     [[ -d /usr/sbin ]] && export PATH="/usr/sbin:${PATH}"
-    [[ -x /usr/share/git-core/contrib/completion/git-prompt.sh ]] && . /usr/share/git-core/contrib/completion/git-prompt.sh
+    [[ -f /usr/share/git-core/contrib/completion/git-prompt.sh ]] && . /usr/share/git-core/contrib/completion/git-prompt.sh
 fi
 
 shopt -s globstar
