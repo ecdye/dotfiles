@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-[[ -n "$GHOSTTY_RESOURCES_DIR" ]] && . "${GHOSTTY_RESOURCES_DIR}/shell-integration/bash/ghostty.bash"
 [[ -f "${HOME}/.bashrc" ]] && . "${HOME}/.bashrc"
 [[ -f "${HOME}/.env" ]] && . "${HOME}/.env"
 
@@ -45,7 +44,7 @@ export HISTTIMEFORMAT="[%F %T] "
 export HISTFILE=~/.bash_eternal_history
 # Force prompt to write history after every command.
 # http://superuser.com/questions/20900/bash-history-loss
-PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+PROMPT_COMMAND="history -a${PROMPT_COMMAND:+; $PROMPT_COMMAND}"
 
 [[ -d "${HOME}/.local/bin" ]] && export PATH="${HOME}/.local/bin:$PATH"
 [[ -d "${HOME}/bin" ]] && export PATH="${HOME}/bin:$PATH"

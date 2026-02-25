@@ -28,3 +28,6 @@ keybind = ctrl+b>x=new_split:down
 # Update Settings
 auto-update = download
 auto-update-channel = tip
+
+# Other Settings
+shell-integration = bash
