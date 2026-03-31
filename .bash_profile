@@ -16,6 +16,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
     [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
     alias uk="security unlock-keychain ~/Library/Keychains/login.keychain-db"
+    alias cdx='codex "Read ./AGENTS.md and say '\''Ready'\''"'
 fi
 
 if [[ "$OSTYPE" == "linux"* ]]; then
