@@ -1,3 +1,5 @@
+**/.claude/settings.local.json
+.envrc
 Session.vim
 .DS_Store
 **/node_modules/**

@@ -12,7 +12,7 @@ window-height = 30
 window-width = 125
 window-step-resize = true
 theme = Dark+
-font-size = 12
+font-size = 13
 font-family = "JetBrainsMonoNL Nerd Font"
 quick-terminal-position = bottom
 
@@ -27,7 +27,7 @@ keybind = ctrl+b>x=new_split:down
 
 # Update Settings
 auto-update = download
-auto-update-channel = tip
+auto-update-channel = stable
 
 # Other Settings
 shell-integration = bash

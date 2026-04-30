@@ -2,6 +2,8 @@
 	name = Ethan Dye
 	email = mrtops03@gmail.com
 	signingkey = 3E5F75E423B9119D
+[includeIf "gitdir:~/src/240/"]
+	path = ~/.gitconfig-work
 [commit]
 	gpgsign = true
 [color]
@@ -12,6 +14,7 @@
 	defaultBranch = main
 [core]
 	editor = nvim
+	excludesfile = /Users/ecdye/.gitignore_global
 [alias]
 	co = checkout
 	ci = commit
