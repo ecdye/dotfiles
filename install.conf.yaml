@@ -15,6 +15,7 @@
         path: ghostty
         force: true
     ~/.gitconfig: .gitconfig
+    ~/.gitconfig-work: .gitconfig-work
     ~/.gitignore_global: .gitignore_global
     ~/.bash_profile: .bash_profile
     ~/.gnupg/common.conf: gnupg/common.conf
