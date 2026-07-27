@@ -5,3 +5,4 @@
 [submodule "nvim"]
 	path = nvim
 	url = https://github.com/ecdye/kickstart-modular.nvim
+	branch = main

@@ -13,7 +13,7 @@ window-width = 125
 window-step-resize = true
 theme = Dark+
 font-size = 13
-font-family = "JetBrainsMonoNL Nerd Font"
+font-family = "JetBrainsMonoNL NFM"
 quick-terminal-position = bottom
 
 # Keybinds

@@ -14,7 +14,7 @@
 	defaultBranch = main
 [core]
 	editor = nvim
-	excludesfile = /Users/ecdye/.gitignore_global
+	excludesfile = ~/.gitignore_global
 [alias]
 	co = checkout
 	ci = commit

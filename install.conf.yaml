@@ -10,7 +10,9 @@
 
 - link:
     ~/.tmux.conf: tmux.conf
-    ~/.config/nvim: nvim
+    ~/.config/nvim:
+        path: nvim
+        force: true
     ~/.config/ghostty:
         path: ghostty
         force: true
@@ -20,6 +22,8 @@
     ~/.bash_profile: .bash_profile
     ~/.gnupg/common.conf: gnupg/common.conf
     ~/.gnupg/gpg.conf: gnupg/gpg.conf
+    ~/.claude/agents: claude/agents
+    ~/.claude/skills: claude/skills
 
 - create:
     ~/src:
@@ -28,4 +32,4 @@
 - shell:
     - sed -e 's|PINENTRYPATH|'"$(pwd)"'/gpg-pinentry|' gnupg/gpg-agent.conf > ~/.gnupg/gpg-agent.conf
     - chown -R "$USER" ~/.gnupg
-    - nvim --headless "+Lazy! restore" +qa
+    - nvim --headless -c "lua vim.pack.update(nil, { target = 'lockfile' })" -c "w" -c "qa"
