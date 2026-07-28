@@ -22,6 +22,9 @@
     ~/.bash_profile: .bash_profile
     ~/.gnupg/common.conf: gnupg/common.conf
     ~/.gnupg/gpg.conf: gnupg/gpg.conf
+    ~/.claude/CLAUDE.md:
+        path: claude/CLAUDE.md
+        force: true
     ~/.claude/agents: claude/agents
     ~/.claude/skills: claude/skills
 

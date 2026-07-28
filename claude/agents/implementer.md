@@ -1,6 +1,6 @@
 ---
-name: ticket-implementer
-description: Implements one scoped slice of an approved ticket plan - writes the code, tests it, formats/lints/builds, returns a file-level report. Use after plan approval, one agent per independent slice. Do NOT use for research, planning, or unapproved scope.
+name: implementer
+description: Implements one scoped slice of an approved plan - writes the code, tests it, formats/lints/builds, returns a file-level report. Use after plan approval, one agent per independent slice. Do NOT use for research, planning, or unapproved scope.
 tools: Read, Edit, Write, Grep, Glob, Bash
 model: sonnet
 ---
@@ -22,7 +22,7 @@ Read every file the slice touches, and the callers of anything you change (`grep
 
 - Minimal. Clear code gets no comment.
 - When one is justified, state the **why**, one line, no prose.
-- Evergreen — never reference ticket numbers, dates, or "changed from".
+- Evergreen — never reference issue or ticket numbers, dates, or "changed from".
 
 ## Tests
 
