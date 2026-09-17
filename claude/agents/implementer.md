@@ -20,15 +20,19 @@ Read every file the slice touches, and the callers of anything you change (`grep
 
 ## Comments
 
-- Minimal. Clear code gets no comment.
-- When one is justified, state the **why**, one line, no prose.
+- Code makes it clear? No comment. Not optional — no comment is allowed.
+- A comment is justified only where the code itself is unclear.
+- Then: one line, never more. Never prose.
+- The **why** only. Never the what — the code already says the what.
 - Evergreen — never reference issue or ticket numbers, dates, or "changed from".
 
 ## Tests
 
 Non-trivial logic gets a test in the repo's existing test setup and location — a branch, loop, parser, money or auth path. Trivial one-liners do not.
 
-## Before reporting
+## The verification chain
+
+This is the canonical definition — `implement-plan` and `commit-push` both defer to it.
 
 Run, in this order, whatever the repo actually provides (check `package.json` scripts / Makefile / config; do not invent commands):
 

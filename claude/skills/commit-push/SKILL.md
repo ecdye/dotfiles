@@ -30,7 +30,8 @@ code.
 
 ## 3. Commit
 
-- Verify first: autoformat, lint, build, test. Do not commit a broken tree.
+- Verify first — run the chain defined in `~/.claude/agents/implementer.md`
+  ("The verification chain"). Do not commit a broken tree.
 - Review the staged diff before writing the message — never `git add -A` blind.
 - Message states the why. No ticket numbers in the body; the branch carries the
   key.

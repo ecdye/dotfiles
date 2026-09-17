@@ -12,7 +12,7 @@ window-height = 30
 window-width = 125
 window-step-resize = true
 theme = Dark+
-font-size = 13
+font-size = 14
 font-family = "JetBrainsMonoNL NFM"
 quick-terminal-position = bottom
 
@@ -22,8 +22,8 @@ keybind = performable:ctrl+h=goto_split:left
 keybind = performable:ctrl+j=goto_split:down
 keybind = performable:ctrl+k=goto_split:up
 keybind = performable:ctrl+l=goto_split:right
-keybind = ctrl+b>v=new_split:right
-keybind = ctrl+b>x=new_split:down
+# keybind = ctrl+b>v=new_split:right
+# keybind = ctrl+b>x=new_split:down
 
 # Update Settings
 auto-update = download

@@ -8,9 +8,9 @@ description: Start work on a Jira ticket - set up a git worktree and branch, rea
 Ticket key comes from the user's message (pattern `DEV-\d+`). If no key is
 present, ask for it before doing anything.
 
-This skill owns only the ticket-specific setup. Research, planning,
-implementation, and pushing are the general skills: `plan-work`,
-`implement-plan`, `commit-push`.
+This skill owns only the ticket-specific setup. Research and pushing are the
+general skills `plan-work` and `commit-push`; implementation is the
+`implement-plan` agent.
 
 ## 1. Read the ticket
 
