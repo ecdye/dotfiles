@@ -9,6 +9,7 @@
       recursive: true
 
 - link:
+    ~/.Brewfile: Brewfile
     ~/.tmux.conf: tmux.conf
     ~/.config/nvim:
         path: nvim
@@ -28,11 +29,40 @@
     ~/.claude/agents: claude/agents
     ~/.claude/skills: claude/skills
 
-- create:
-    ~/src:
-        mode: 0775
-
 - shell:
-    - sed -e 's|PINENTRYPATH|'"$(pwd)"'/gpg-pinentry|' gnupg/gpg-agent.conf > ~/.gnupg/gpg-agent.conf
-    - chown -R "$USER" ~/.gnupg
-    - nvim --headless -c "lua vim.pack.update(nil, { target = 'lockfile' })" -c "w" -c "qa"
+    - description: Enable Touch ID for sudo
+      command: |
+        [ "$(uname)" = "Darwin" ] || exit 0
+        if ! grep -qs '^auth.*pam_tid.so' /etc/pam.d/sudo_local; then
+          echo 'auth       sufficient     pam_tid.so' | sudo tee /etc/pam.d/sudo_local >/dev/null
+        fi
+      stdin: true
+      stdout: true
+      stderr: true
+    - description: Install Hombrew packages
+      command: |
+        [ "$(uname)" = "Darwin" ] || exit 0
+        brew bundle --global
+      stdin: true
+      stdout: true
+      stderr: true
+    - description: Register Homebrew bash as login shell
+      command: |
+        [ "$(uname)" = "Darwin" ] || exit 0
+        BASH_PATH="$(brew --prefix)/bin/bash"
+        grep -qxF "$BASH_PATH" /etc/shells || echo "$BASH_PATH" | sudo tee -a /etc/shells
+        [ "$SHELL" = "$BASH_PATH" ] || chsh -s "$BASH_PATH"
+      stdin: true
+      stdout: true
+      stderr: true
+    - description: Setup pinentry for GPG
+      command: sed -e 's|PINENTRYPATH|'"$(pwd)"'/gpg-pinentry|' gnupg/gpg-agent.conf > ~/.gnupg/gpg-agent.conf
+    - description: Fix ~/.gnupg permissions
+      command: |
+        chown -R "$USER" ~/.gnupg
+        chmod 700 ~/.gnupg
+        find ~/.gnupg -type d -exec chmod 700 {} +
+        find ~/.gnupg -type f -exec chmod 600 {} +
+      stderr: true
+    - description: Setup neovim plugins
+      command: nvim --headless -c "lua vim.pack.update(nil, { target = 'lockfile' })" -c "w" -c "qa"

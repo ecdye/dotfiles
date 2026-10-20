@@ -2,7 +2,7 @@
 	name = Ethan Dye
 	email = mrtops03@gmail.com
 	signingkey = 3E5F75E423B9119D
-[includeIf "gitdir:~/src/240/"]
+[includeIf "gitdir:~/Developer/240/"]
 	path = ~/.gitconfig-work
 [commit]
 	gpgsign = true
@@ -24,8 +24,6 @@
 	df = diff
 	ps = push
 [credential "https://github.com"]
-	helper = 
 	helper = !/opt/homebrew/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-	helper = 
 	helper = !/opt/homebrew/bin/gh auth git-credential
