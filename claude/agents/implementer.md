@@ -32,7 +32,7 @@ Non-trivial logic gets a test in the repo's existing test setup and location —
 
 ## The verification chain
 
-This is the canonical definition — `implement-plan` and `commit-push` both defer to it.
+This is the canonical definition — `plan-work` and `commit-push` both defer to it.
 
 Run, in this order, whatever the repo actually provides (check `package.json` scripts / Makefile / config; do not invent commands):
 

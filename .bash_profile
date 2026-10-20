@@ -4,17 +4,8 @@
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
     [[ -d /opt/homebrew ]] && eval "$(/opt/homebrew/bin/brew shellenv)" && export HOMEBREW_NO_ENV_HINTS=1
-    HOMEBREW_PREFIX="$(brew --prefix)"
     [[ -f "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]] && . "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
-    [[ -d "${HOMEBREW_PREFIX}/opt/gawk" ]] && export PATH="${HOMEBREW_PREFIX}/opt/gawk/libexec/gnubin:$PATH"
-    if [[ -d "${HOMEBREW_PREFIX}/opt/ruby" ]]; then
-        export PATH="${HOMEBREW_PREFIX}/opt/ruby/bin:$PATH"
-        export PATH="${HOMEBREW_PREFIX}/lib/ruby/gems/3.4.0/bin:$PATH"
-    fi
-    export JAVA_HOME="$(/usr/libexec/java_home -v 21)"
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-    [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+    JAVA_HOME="$(/usr/libexec/java_home -v 21 2>/dev/null || /usr/libexec/java_home 2>/dev/null)" && export JAVA_HOME
     alias uk="security unlock-keychain ~/Library/Keychains/login.keychain-db"
     alias cdx='codex "Read ./AGENTS.md and say '\''Ready'\''"'
 fi
@@ -51,11 +42,29 @@ PROMPT_COMMAND="history -a${PROMPT_COMMAND:+; $PROMPT_COMMAND}"
 [[ -d "${HOME}/bin" ]] && export PATH="${HOME}/bin:$PATH"
 [[ -f "/etc/profile.d/bash_completion.sh" ]] && . "/etc/profile.d/bash_completion.sh"
 
-alias ls="ls --color=always"
+export NVM_DIR="${HOME}/.nvm"
+if [[ -s "${NVM_DIR}/nvm.sh" ]]; then
+    # Sourcing nvm.sh adds ~0.3s to every shell, so put the default Node on PATH now and load nvm on first use.
+    __nvm_default="$(cat "${NVM_DIR}/alias/default" 2>/dev/null)"
+    __nvm_bin="$(ls -d "${NVM_DIR}/versions/node/v${__nvm_default#v}"*/bin 2>/dev/null | sort -V | tail -1)"
+    [[ -n "$__nvm_bin" ]] || __nvm_bin="$(ls -d "${NVM_DIR}/versions/node/v"*/bin 2>/dev/null | sort -V | tail -1)"
+    [[ -n "$__nvm_bin" ]] && export PATH="${__nvm_bin}:$PATH"
+    unset __nvm_default __nvm_bin
+    # --no-use keeps nvm.sh from switching to the default and clobbering a version direnv picked.
+    nvm() {
+        unset -f nvm
+        . "${NVM_DIR}/nvm.sh" --no-use
+        [[ -s "${NVM_DIR}/bash_completion" ]] && . "${NVM_DIR}/bash_completion"
+        nvm "$@"
+    }
+    export -f nvm
+fi
+
+alias ls="ls --color=auto"
 alias la="ls -la"
 alias l.="ls -d .*"
 alias ll="ls -l"
-alias grep="grep --color=always"
+alias grep="grep --color=auto"
 alias cd..="cd .."
 alias cs="cd"
 alias dotfiles="cd ${HOME}/dotfiles"
@@ -71,6 +80,8 @@ if command -v gpg &> /dev/null; then
     export GPG_TTY=$(tty)
 fi
 
-eval "$(direnv hook bash)"
+if command -v direnv &> /dev/null; then
+    eval "$(direnv hook bash)"
+fi
 
 # vim: ft=bash

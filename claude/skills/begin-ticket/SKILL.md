@@ -9,8 +9,8 @@ Ticket key comes from the user's message (pattern `DEV-\d+`). If no key is
 present, ask for it before doing anything.
 
 This skill owns only the ticket-specific setup. Research and pushing are the
-general skills `plan-work` and `commit-push`; implementation is the
-`implement-plan` agent.
+general skills `plan-work` and `commit-push`; implementation is `implementer`
+agents, coordinated per `plan-work`.
 
 ## 1. Read the ticket
 

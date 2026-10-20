@@ -8,6 +8,14 @@
     ~/.config:
       recursive: true
 
+- shell:
+    - description: Replace the old whole-directory ~/.claude/skills link
+      command: |
+        [ -L ~/.claude/skills ] || exit 0
+        rm ~/.claude/skills
+        mkdir -p ~/.claude/skills
+        [ ! -d claude/skills/synced ] || mv claude/skills/synced ~/.claude/skills/synced
+
 - link:
     ~/.Brewfile: Brewfile
     ~/.tmux.conf: tmux.conf
@@ -27,7 +35,9 @@
         path: claude/CLAUDE.md
         force: true
     ~/.claude/agents: claude/agents
-    ~/.claude/skills: claude/skills
+    ~/.claude/skills/:
+        glob: true
+        path: claude/skills/*
 
 - shell:
     - description: Enable Touch ID for sudo
@@ -39,17 +49,34 @@
       stdin: true
       stdout: true
       stderr: true
-    - description: Install Hombrew packages
+    - description: Install Homebrew
       command: |
         [ "$(uname)" = "Darwin" ] || exit 0
+        [ -x /opt/homebrew/bin/brew ] && exit 0
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      stdin: true
+      stdout: true
+      stderr: true
+    - description: Install Homebrew packages
+      command: |
+        [ "$(uname)" = "Darwin" ] || exit 0
+        eval "$(/opt/homebrew/bin/brew shellenv)"
         brew bundle --global
       stdin: true
+      stdout: true
+      stderr: true
+    - description: Install nvm
+      command: |
+        [ -d ~/.nvm/.git ] && exit 0
+        # Homebrew's nvm leaves symlinks here that block the installer's git checkout.
+        [ ! -L ~/.nvm/nvm.sh ] || rm -f ~/.nvm/nvm.sh ~/.nvm/nvm-exec
+        curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.8/install.sh | PROFILE=/dev/null bash
       stdout: true
       stderr: true
     - description: Register Homebrew bash as login shell
       command: |
         [ "$(uname)" = "Darwin" ] || exit 0
-        BASH_PATH="$(brew --prefix)/bin/bash"
+        BASH_PATH="/opt/homebrew/bin/bash"
         grep -qxF "$BASH_PATH" /etc/shells || echo "$BASH_PATH" | sudo tee -a /etc/shells
         [ "$SHELL" = "$BASH_PATH" ] || chsh -s "$BASH_PATH"
       stdin: true
@@ -65,4 +92,6 @@
         find ~/.gnupg -type f -exec chmod 600 {} +
       stderr: true
     - description: Setup neovim plugins
-      command: nvim --headless -c "lua vim.pack.update(nil, { target = 'lockfile' })" -c "w" -c "qa"
+      command: |
+        [ ! -x /opt/homebrew/bin/brew ] || eval "$(/opt/homebrew/bin/brew shellenv)"
+        nvim --headless -c "lua vim.pack.update(nil, { target = 'lockfile' })" -c "w" -c "qa"

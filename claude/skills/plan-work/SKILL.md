@@ -46,7 +46,7 @@ a symptom.
 - Cover every aspect: implementation, tests, formatting, linting, docs,
   migrations and config if relevant.
 - Slice the plan into independent units where possible, and say which slices
-  overlap files — the `implement-plan` agent parallelizes on those boundaries.
+  overlap files — implementation parallelizes on those boundaries.
 - State the acceptance criteria per slice, and the verification commands the
   repo actually provides.
 - Name what you deliberately left out and why.
@@ -57,4 +57,23 @@ Present the plan via `ExitPlanMode` — that is the approval gate, not a message
 asking "look good?". **Do not edit code before approval.**
 
 - Rejected or refined: stay in plan mode, revise, call `ExitPlanMode` again.
-- Approved: hand off to the `implement-plan` agent.
+- Approved: implement (step 5).
+
+## 5. Implement
+
+You coordinate; `implementer` agents write the code, one per slice.
+
+- Dispatch slices that share no files concurrently, in a single message.
+  Slices that overlap files run in sequence, the later one briefed on what the
+  earlier one changed.
+- Brief each agent fully — it has none of your context: the slice, the files it
+  owns, its acceptance criteria, the verification commands, and any decisions
+  from the plan it must follow.
+- Read every report. A slice that failed, drifted from the plan, or touched
+  files outside its brief gets re-dispatched with the correction, not patched
+  by you.
+- An agent reports the plan is wrong or impossible: stop and bring it back to
+  the user. Do not redesign around it.
+- Once all slices land, review the combined diff for seams between slices, then
+  run the verification chain over the whole tree. Fix what the slices broke
+  together before reporting back.
