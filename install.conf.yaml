@@ -8,14 +8,6 @@
     ~/.config:
       recursive: true
 
-- shell:
-    - description: Replace the old whole-directory ~/.claude/skills link
-      command: |
-        [ -L ~/.claude/skills ] || exit 0
-        rm ~/.claude/skills
-        mkdir -p ~/.claude/skills
-        [ ! -d claude/skills/synced ] || mv claude/skills/synced ~/.claude/skills/synced
-
 - link:
     ~/.Brewfile: Brewfile
     ~/.tmux.conf: tmux.conf
@@ -95,3 +87,11 @@
       command: |
         [ ! -x /opt/homebrew/bin/brew ] || eval "$(/opt/homebrew/bin/brew shellenv)"
         nvim --headless -c "lua vim.pack.update(nil, { target = 'lockfile' })" -c "w" -c "qa"
+    - description: Merge tracked Claude settings into ~/.claude/settings.json
+      command: |
+        [ ! -x /opt/homebrew/bin/brew ] || eval "$(/opt/homebrew/bin/brew shellenv)"
+        mkdir -p ~/.claude
+        live=~/.claude/settings.json
+        # Tools like Orca write hooks into the live file, so it can't be a symlink; tracked keys win, the rest is kept.
+        [ -s "$live" ] || echo '{}' > "$live"
+        jq -s '.[0] * .[1]' "$live" claude/settings.json > "$live.tmp" && mv "$live.tmp" "$live"

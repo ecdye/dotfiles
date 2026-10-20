@@ -1,37 +1,33 @@
 ---
 name: begin-ticket
-description: Start work on a Jira ticket - set up a git worktree and branch, read the ticket, and move it to Coding, then hand off to plan-work for research and planning. Use whenever the user says "begin work on ticket DEV-1234", "start ticket DEV-1234", "pick up DEV-1234", "work on DEV-1234", or names a DEV-#### ticket as the thing to start. Also covers the Jira transitions for the rest of that ticket's life.
+description: Start work on a Jira ticket - set up a git worktree and branch, read the ticket, and move it to Coding, then hand off to plan-work for research and planning. Use whenever the user says "begin work on ticket ABC-1234", "start ticket ABC-1234", "pick up ABC-1234", "work on ABC-1234", or names a Jira issue key (any board's prefix, e.g. DEV-1234) as the thing to start. Also covers the Jira transitions for the rest of that ticket's life.
 ---
 
 # Begin work on a Jira ticket
 
-Ticket key comes from the user's message (pattern `DEV-\d+`). If no key is
-present, ask for it before doing anything.
+The ticket key comes from the user's message — any board's prefix (pattern
+`[A-Z][A-Z0-9]+-\d+`, e.g. `DEV-1234`). If no key is present, ask for it.
 
-This skill owns only the ticket-specific setup. Research and pushing are the
-general skills `plan-work` and `commit-push`; implementation is `implementer`
-agents, coordinated per `plan-work`.
+Research and pushing are `plan-work` and `commit-push`; this skill owns only the
+ticket-specific setup.
 
 ## 1. Read the ticket
 
-- Read the ticket (`getJiraIssue`) plus comments and linked issues for context.
-- Derive a few-word kebab-case summary from the title for the branch name.
+Read the ticket (`getJiraIssue`) plus comments and linked issues. Derive a
+few-word kebab-case summary from the title.
 
 ## 2. Worktree and branch
 
-- Worktrees live in `../worktrees` relative to the repo root. Create the
-  directory if missing.
-- Base branch: `staging` if it exists on the origin, else `main`. Fetch and pull
-  the base before branching.
-- Branch name: `DEV-XXXX/few-word-summary`.
-- Worktree path: `../worktrees/DEV-XXXX`. Work there for the rest of the ticket.
+- Branch `<KEY>/few-word-summary` off the base branch (CLAUDE.md), fetched
+  first.
+- Already in a linked worktree (usually, via Orca)? Use it, and rename its
+  branch if it was never pushed.
+- Otherwise create one at `worktrees/<KEY>`, next to the main checkout.
 
 ## 3. Transition to Coding
 
-`getTransitionsForJiraIssue`, then `transitionJiraIssue` to **Coding**, to show
-work has begun.
+`getTransitionsForJiraIssue`, then `transitionJiraIssue` to **Coding**.
 
 ## 4. Hand off
 
-Run `plan-work` with the ticket as the task source. Everything after that is the
-general workflow — nothing about it is ticket-specific.
+Run `plan-work` with the ticket as the task source.

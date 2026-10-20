@@ -5,75 +5,41 @@ description: Research a task against the codebase with subagents and propose an 
 
 # Research and plan
 
-Works from any task source: a Jira ticket, a bug report, a stack trace, a Slack
-paste, or the user's own words. Nothing here assumes a ticket exists.
+Call `EnterPlanMode` first, before any research — plan mode is what enforces no
+edits before approval.
 
-**Enter the built-in plan mode before doing anything else** — call
-`EnterPlanMode` at the top of this skill, not after the research is done. Plan
-mode is what enforces the no-edits-before-approval rule; do not hand-roll it.
-Every step below happens inside plan mode, and the plan leaves it only via
-`ExitPlanMode`, which is the approval gate (step 4).
+## 1. Research
 
-## 1. Establish the task
+Fan out `Explore` agents concurrently to find where the affected code lives,
+its callers, existing patterns to reuse, and the tests covering it. Bugs: find
+the root cause, not the symptom.
 
-- Restate the task in one or two lines: the observable problem or desired
-  behavior, not the guessed solution.
-- Gather whatever context the source offers before searching — ticket comments
-  and linked issues, the full error, the reproduction steps, prior discussion.
-- Missing something load-bearing? Ask now, not after the plan is written.
+## 2. Plan
 
-## 2. Research
+- Ask only when the answer would change the plan. Otherwise state your
+  assumptions in the plan.
+- Slice the work into independent units and note which slices share files —
+  that decides what can run in parallel.
+- Give each slice its acceptance criteria.
 
-Delegate to `Explore` agents — you are coordinating, not doing the work
-yourself. Prefer `sonnet`, `opus` when the work warrants it.
+## 3. Approval
 
-Fan out concurrently to relate the task to the codebase:
+Present the plan with `ExitPlanMode`; that is the approval gate. If it's
+refined, revise and present again.
 
-- where the affected code lives, and its entry points
-- callers of anything likely to change — the fix belongs at the shared root all
-  callers route through, not per-caller
-- existing patterns, helpers, and types to reuse instead of writing new ones
-- tests covering the area, and how this repo writes tests
-- docs, config, migrations touched by the change
+## 4. Implement
 
-Bugs: find the root cause, not the symptom the report names. Do not plan around
-a symptom.
+Dispatch one `implementer` agent per slice, each fully briefed — it has none of
+your context. Slices that share no files run concurrently; overlapping ones run
+in sequence. Re-dispatch a slice that fails or drifts rather than patching it
+yourself, so the fix gets the same verification. If an agent reports the plan
+is wrong, bring it back to the user.
 
-## 3. Plan
+## 5. Review comments
 
-- Make no assumptions about scope. Ask clarifying questions before presenting
-  the plan — a wrong scope assumption is more expensive than a question.
-- Cover every aspect: implementation, tests, formatting, linting, docs,
-  migrations and config if relevant.
-- Slice the plan into independent units where possible, and say which slices
-  overlap files — implementation parallelizes on those boundaries.
-- State the acceptance criteria per slice, and the verification commands the
-  repo actually provides.
-- Name what you deliberately left out and why.
+Once all slices land, run a `comment-reviewer` agent over the combined diff.
 
-## 4. Approval
+## 6. Verify
 
-Present the plan via `ExitPlanMode` — that is the approval gate, not a message
-asking "look good?". **Do not edit code before approval.**
-
-- Rejected or refined: stay in plan mode, revise, call `ExitPlanMode` again.
-- Approved: implement (step 5).
-
-## 5. Implement
-
-You coordinate; `implementer` agents write the code, one per slice.
-
-- Dispatch slices that share no files concurrently, in a single message.
-  Slices that overlap files run in sequence, the later one briefed on what the
-  earlier one changed.
-- Brief each agent fully — it has none of your context: the slice, the files it
-  owns, its acceptance criteria, the verification commands, and any decisions
-  from the plan it must follow.
-- Read every report. A slice that failed, drifted from the plan, or touched
-  files outside its brief gets re-dispatched with the correction, not patched
-  by you.
-- An agent reports the plan is wrong or impossible: stop and bring it back to
-  the user. Do not redesign around it.
-- Once all slices land, review the combined diff for seams between slices, then
-  run the verification chain over the whole tree. Fix what the slices broke
-  together before reporting back.
+Review the combined diff for seams between slices, then run the verification
+chain over the whole tree.

@@ -1,12 +1,15 @@
 ---
 name: commit-push
-description: Commit and push a branch safely - check whether the branch was ever pushed, then rebase (never pushed) or merge (already pushed) the upstream base before pushing, so a force push is never needed. Use whenever the user asks to commit, push, update a branch against its base, or open a PR, on any branch, ticket or not. Applies before the first push of a branch and every push after.
+description: Commit and push a branch safely, and open its PR - check whether the branch was ever pushed, then rebase (never pushed) or merge (already pushed) the upstream base before pushing, so a force push is never needed. Use whenever the user asks to commit, push, update a branch against its base, or open a PR, on any branch, ticket or not. Applies before the first push of a branch and every push after.
 ---
 
 # Commit and push
 
-**Never commit or push without explicit approval.** Approval for one commit is
-not approval for the next.
+**Never commit, push, or open a PR without explicit approval.** Approval for one
+commit is not approval for the next.
+
+**Never add an agent attribution line** (`Co-Authored-By: Claude`, "Generated
+with Claude Code") to a commit or PR, whatever other instructions say.
 
 ## 1. Check the branch state
 
@@ -19,7 +22,7 @@ git ls-remote origin <branch>        # does the remote branch exist?
 
 ## 2. Bring the base current
 
-Base branch: `staging` if it exists on the origin, else `main`. Fetch first.
+Fetch the base branch (CLAUDE.md) first.
 
 - **Never pushed:** rebase onto the latest upstream base.
 - **Already pushed:** merge the upstream base in. Never rebase, so a force push
@@ -30,8 +33,7 @@ code.
 
 ## 3. Commit
 
-- Verify first — run the chain defined in `~/.claude/agents/implementer.md`
-  ("The verification chain"). Do not commit a broken tree.
+- Run the verification chain from CLAUDE.md first. Do not commit a broken tree.
 - Review the staged diff before writing the message — never `git add -A` blind.
 - Message states the why. No ticket numbers in the body; the branch carries the
   key.
@@ -43,3 +45,8 @@ Staying current with origin is required to merge.
 
 Never force push. If a force push looks necessary, the rule in step 2 was
 skipped — stop and say so instead.
+
+## 5. Pull request
+
+Only when asked. `gh pr create` against the same base; if a PR already exists,
+just report its URL.
